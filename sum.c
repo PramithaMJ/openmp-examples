@@ -1,22 +1,31 @@
 #include <stdio.h>
+#include <time.h>
 
 int main()
 {
-    const int N = 100;
+    clock_t start, end;
+    double cpu_time_used;
+    const int N = 1000000;
     int A[N], B[N];
-    int sum = 0;
+    long long sum = 0;
 
     for (int i = 0; i < N; i++)
     {
         A[i] = i;
         B[i] = i;
     }
+    start = clock();
 
     for (int i = 0; i < N; i++)
     {
         sum += (A[i] + B[i]);
     }
 
-    printf("Total sum: %d\n", sum);
+    end = clock();
+
+    printf("Total sum: %lld\n", sum);
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Time taken: %f\n", cpu_time_used);
+
     return 0;
 }
